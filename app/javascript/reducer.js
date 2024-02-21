@@ -1,17 +1,19 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
-    randomMessage: '',
-  };
+  randomMessage: "",
+};
 
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'SET_RANDOM_MESSAGE':
-        return {
-          ...state,
-          randomMessage: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
+const randomMessageSlice = createSlice({
+  name: "randomMessage",
+  initialState,
+  reducers: {
+    setRandomMessage: (state, action) => {
+      state.randomMessage = action.payload;
+    },
+  },
+});
 
-  export default reducer;
+export const { setRandomMessage } = randomMessageSlice.actions;
+
+export default randomMessageSlice.reducer;
