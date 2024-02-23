@@ -1,16 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = {
-  randomMessage: "",
-};
+export const fetchRandomMessage = createAsyncThunk(
+  "randomMessage/fetchRandomMessage",
+  async () => {
+    const response = await fetch("/api/v1/random/message");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.message;
+  }
+);
 
 const randomMessageSlice = createSlice({
   name: "randomMessage",
-  initialState,
+  initialState: {
+    message: "",
+    status: "idle",
+    error: null,
+  },
   reducers: {
     setRandomMessage: (state, action) => {
-      state.randomMessage = action.payload;
+      state.message = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRandomMessage.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchRandomMessage.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.message = action.payload;
+      })
+      .addCase(fetchRandomMessage.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
