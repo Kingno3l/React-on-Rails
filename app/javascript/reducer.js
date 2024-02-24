@@ -20,11 +20,7 @@ const randomMessageSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {
-    setRandomMessage: (state, action) => {
-      state.message = action.payload;
-    },
-  },
+  
   extraReducers: (builder) => {
     builder
       .addCase(fetchRandomMessage.pending, (state) => {
@@ -40,7 +36,5 @@ const randomMessageSlice = createSlice({
       });
   },
 });
-
-export const { setRandomMessage } = randomMessageSlice.actions;
 
 export default randomMessageSlice.reducer;

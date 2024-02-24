@@ -1,51 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchRandomMessage } from '../actions';
 
-const Greeting = ({ randomMessage, fetchRandomMessage }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [countdown, setCountdown] = useState(10);
-
-  useEffect(() => {
-     const fetchMessage = async () => {
-      try {
-        await fetchRandomMessage();
-        setIsLoading(false);
-      } catch (error) {
-        throw new Error('Error fetching data:', error);
-      }
-    };
-
-    fetchMessage();
-  }, [fetchRandomMessage]);
+const Greeting = () => {
+  const { status, message, error } = useSelector((state) => state.randomMessage);
+  const dispatch = useDispatch();
+  const [countdown, setCountdown] = useState(0);
 
   useEffect(() => {
     if (countdown === 0) {
-      fetchRandomMessage();
+      dispatch(fetchRandomMessage());
       setCountdown(10);
     } else {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
       return () => clearTimeout(timer);
     }
-  }, [countdown, fetchRandomMessage]);
-
-  if (isLoading) {
-    return <div class="loading">Loading...</div>;
-  }
+  }, [countdown, dispatch]);
 
     return (
        <div class="greeting-content">
          <h1>Greeting of the day</h1>
-         <p>"{randomMessage}"</p>
-         <h2>Greeting changes in: <span>{countdown}</span></h2>
+        {status === 'loading' && <div>Loading...</div>}
+        {status === 'failed' && error && <div>Error: {error}</div>}
+        {status === 'succeded' && message && <p>"{message}"</p>}
+        <p>Greeting changes in: <span>{countdown}</span></p>
        </div>
      );
-   };
-
-   const mapStateToProps = (state) => {
-     return {
-       randomMessage: state.randomMessage,
-     };
-   };
-
-   export default connect(mapStateToProps, { fetchRandomMessage })(Greeting);
+};
+export default Greeting;

@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './reducer';
+import randomMessageReducer from './reducer';
 
 const store = configureStore({
-  reducer,
+  reducer: {
+    randomMessage: randomMessageReducer,
+  },
 });
 
 export default store;
