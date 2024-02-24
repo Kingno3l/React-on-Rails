@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRandomMessage } from '../actions';
+import { fetchRandomMessage } from '../reducer';
 
 const Greeting = () => {
   const { status, message, error } = useSelector((state) => state.randomMessage);
@@ -18,13 +18,15 @@ const Greeting = () => {
   }, [countdown, dispatch]);
 
     return (
-       <div class="greeting-content">
-         <h1>Greeting of the day</h1>
-        {status === 'loading' && <div>Loading...</div>}
-        {status === 'failed' && error && <div>Error: {error}</div>}
-        {status === 'succeded' && message && <p>"{message}"</p>}
-        <p>Greeting changes in: <span>{countdown}</span></p>
-       </div>
-     );
+      <div class="greeting-content">
+        <h1>Greeting of the day...</h1>
+        {status === "loading" && <div>Loading...</div>}
+        {status === "failed" && error && <div>Error: {error}</div>}
+        {status === "succeded" && message && <p>"{message}"</p>}
+        <p>
+          Greeting changes in..: <span>{countdown}</span>
+        </p>
+      </div>
+    );
 };
 export default Greeting;

@@ -20,7 +20,9 @@ const randomMessageSlice = createSlice({
     status: "idle",
     error: null,
   },
-  
+  reducers: {
+   
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchRandomMessage.pending, (state) => {
