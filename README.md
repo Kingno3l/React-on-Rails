@@ -12,7 +12,7 @@
 
 # 📗 Table of Contents
 
-- [� Table of Contents](#-table-of-contents)
+- [📗 Table of Contents](#-table-of-contents)
 - [HELLO-RAILS-REACT ](#hello-rails-react-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
@@ -167,6 +167,7 @@ Contributions, issues, and feature requests are welcome!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
+
 
 ## 📝 License <a name="license"></a>
 

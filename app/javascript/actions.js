@@ -12,35 +12,3 @@ export const fetchRandomMessage = createAsyncThunk(
     return data.message;
   }
 );
-
-const randomMessageSlice = createSlice({
-  name: "randomMessage",
-  initialState: {
-    message: "",
-    status: "idle",
-    error: null,
-  },
-  reducers: {
-    setRandomMessage: (state, action) => {
-      state.message = action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchRandomMessage.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchRandomMessage.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.message = action.payload;
-      })
-      .addCase(fetchRandomMessage.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
-  },
-});
-
-export const { setRandomMessage } = randomMessageSlice.actions;
-
-export default randomMessageSlice.reducer;
