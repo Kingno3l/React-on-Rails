@@ -12,4 +12,3 @@ export const getRandomGreeting = () => (dispatch) => {
     })
     .catch((error) => error);
 };
-
