@@ -1,8 +1,12 @@
-Rails.application.routes.draw do
-  root 'root#index'
-  get '/random_greeting', to: 'greetings#random_greeting'
+# frozen_string_literal: true
 
-  match '*path', to: 'root#index', via: :all # for react router to work
+Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'greetings/index'
+    end
+  end
+  root 'root#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -1,12 +1,15 @@
-import React from 'react';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import store from '../redux/store';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Greeting from './Greeting';
+import { Provider } from 'react-redux';
+import RandomMessage from './Greeting.jsx';
 
-function App() {
+const App = () => {
   return (
-      <Routes>
-        <Route path="/" element={<Greeting />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<RandomMessage />} />
+    </Routes>
   );
 };
 
@@ -20,6 +23,5 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
 
 export default App;
