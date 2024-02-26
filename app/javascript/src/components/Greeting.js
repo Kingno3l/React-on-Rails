@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from 'react';
 import fetchData from "../redux/welcome/fetchAPi";
 
 const RandomMessage = () => {
